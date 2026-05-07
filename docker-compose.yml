@@ -49,24 +49,6 @@ services:
       MYSQL_ROOT_PASSWORD: root
     networks:
       - laravel
-
-  wordpress:
-    image: wordpress:6.5-php8.2-apache
-    container_name: wordpress
-    restart: always
-    ports:
-      - "8081:80"
-    environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_NAME: laravel
-      WORDPRESS_DB_USER: root
-      WORDPRESS_DB_PASSWORD: root
-    volumes:
-      - wordpress_data:/var/www/html
-    depends_on:
-      - db
-    networks:
-      - laravel
   
   eduma-n8n:   
     image: n8nio/n8n
@@ -88,32 +70,8 @@ services:
     networks:
       - laravel
 
-  scheduler:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: laravel_scheduler
-    volumes:
-      - .:/var/www
-    working_dir: /var/www
-    environment:
-      DB_CONNECTION: mysql
-      DB_HOST: db
-      DB_PORT: 3306
-      DB_DATABASE: eduma
-      DB_USERNAME: root
-      DB_PASSWORD: root
-    depends_on:
-      - db
-      - app
-    restart: always
-    networks:
-      - laravel
-    command: php artisan schedule:work
-
 volumes:
   dbdata:
-  wordpress_data:
 
 networks:
   laravel:

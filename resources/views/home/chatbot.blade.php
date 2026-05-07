@@ -94,7 +94,7 @@
 
     async function sendSessionToN8N() {
         try {
-            const response = await fetch('http://localhost:5678/webhook/postgrest', {
+            const response = await fetch('https://n8n.mhieu.io.vn/webhook/postgrest', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -160,7 +160,7 @@
     async function sendToBot(message) {
         try {
             const response = await fetch(
-                'http://localhost:5678/webhook/chatbot', {
+                'https://n8n.mhieu.io.vn/webhook/chatbot', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

@@ -36,7 +36,6 @@
         ];
 
         let ckEditor;
-        window.isUploading = false;
         window.touchedFields = new Set(); // Make global
         window.validateLessonField = validateField; // Export function
         const getElement = id => document.getElementById(id);
@@ -83,7 +82,8 @@
                 value = el.value;
                 if (Number(value) < 0) {
                     error = `${name} must be a non-negative number.`;
-                } else if (Number(value) > 999) {
+                }
+                else if (Number(value) > 999) {
                     error = `${name} may not be greater than 999.`;
                 }
             } else {
@@ -109,14 +109,12 @@
         }
 
         function isFormValid() {
-            return fields.every(f => validateField(f, false)) && !window.isUploading;
+            return fields.every(f => validateField(f, false));
         }
 
         function updateSubmitBtn() {
             if (submitBtn) submitBtn.disabled = !isFormValid();
         }
-
-        window.updateSubmitBtn = updateSubmitBtn; 
 
         ClassicEditor
             .create(getElement('ck_editor'))
@@ -182,106 +180,91 @@
 </script>
 
 <script>
-    document.querySelectorAll('input[type=number]').forEach(input => {
-        input.addEventListener('keydown', function(e) {
-            if (["e", "E", "+", "-"].includes(e.key)) {
-                e.preventDefault();
-            }
+document.querySelectorAll('input[type=number]').forEach(input => {
+  input.addEventListener('keydown', function(e) {
+    if (["e", "E", "+", "-"].includes(e.key)) {
+      e.preventDefault();
+    }
 
-            if (e.key === "." && this.value === "") {
-                e.preventDefault();
-                this.value = "0.";
-            }
-        });
+    if (e.key === "." && this.value === "") {
+      e.preventDefault();
+      this.value = "0.";
+    }
+  });
 
-        input.addEventListener('input', function() {
-            this.value = this.value.replace(/[eE+\-]/g, "");
-        });
-    });
+  input.addEventListener('input', function() {
+    this.value = this.value.replace(/[eE+\-]/g, "");
+  });
+});
 </script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const fileInput = document.querySelector('#video');
-        const uploadButton = document.querySelector('.file-upload-browse');
-        const fileInfo = document.querySelector('.file-upload-info');
-        const preview = document.querySelector('#preview');
-        const hiddenInput = document.querySelector('#video_url');
-        const errorDiv = document.querySelector('#error-video');
-        const submitBtn = document.querySelector('#submitBtn');
-
-        uploadButton.addEventListener('click', function() {
-            fileInput.click();
-        });
-
-        fileInput.addEventListener('change', function() {
-            const file = fileInput.files[0];
-            if (!file) return;
-
-            const formData = new FormData();
-            formData.append('video', file);
-
-            fileInfo.value = file.name;
-            console.log('Selected file:', file.name);
-            errorDiv.style.display = 'none';
-
-            window.isUploading = true;
-
-            console.log('Uploading...');
-
-            fetch('{{ route('admin.lessons.upload_video') }}', {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: formData
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        preview.src = data.url;
-                        preview.style.display = 'block';
-                        hiddenInput.value = data.url;
-                        console.log('Upload successful:', data.url);
-                        window.isUploading = false;
-                        updateSubmitBtn();
-                    } else {
-                        errorDiv.textContent = data.message || 'Upload Failed.';
-                        submitBtn.disabled = true;
-                        errorDiv.style.display = 'block';
-                        preview.style.display = 'none';
-                        window.isUploading = false;
-                        hiddenInput.value
-                        updateSubmitBtn();
-
-                    }
-                })
-                .catch(err => {
-                    console.error(err);
-                    errorDiv.textContent = 'Upload Failed.';
-                    errorDiv.style.display = 'block';
-                    window.isUploading = false;
-                    updateSubmitBtn();
-                });
-        });
-    });
-</script>
-
-@if (old('video_url'))
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const oldVideo = "{{ old('video_url') }}";
+            const fileInput = document.querySelector('#video');
+            const uploadButton = document.querySelector('.file-upload-browse');
+            const fileInfo = document.querySelector('.file-upload-info');
             const preview = document.querySelector('#preview');
             const hiddenInput = document.querySelector('#video_url');
-            const fileInfo = document.querySelector('.file-upload-info');
+            const errorDiv = document.querySelector('#error-video');
+            const submitBtn = document.querySelector('#submitBtn');
 
-            if (oldVideo) {
-                preview.src = oldVideo;
-                preview.style.display = 'block';
-                hiddenInput.value = oldVideo;
-                const fileName = oldVideo.split('/').pop();
-                fileInfo.value = fileName;
-            }
+            uploadButton.addEventListener('click', function() {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', function() {
+                const file = fileInput.files[0];
+                if (!file) return;
+
+                const formData = new FormData();
+                formData.append('video', file);
+
+                fileInfo.value = file.name;
+                errorDiv.style.display = 'none';
+
+                fetch('{{ route('admin.lessons.upload_video') }}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: formData
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            preview.src = data.url;
+                            preview.style.display = 'block';
+                            hiddenInput.value = data.url;
+                        } else {
+                            errorDiv.textContent = data.message || 'Upload Failed.';
+                            submitBtn.disabled = true;
+                            errorDiv.style.display = 'block';
+                            preview.style.display = 'none';
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        errorDiv.textContent = 'Upload Failed.';
+                        errorDiv.style.display = 'block';
+                    });
+            });
         });
     </script>
-@endif
+
+    @if (old('video_url'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const oldVideo = "{{ old('video_url') }}";
+                const preview = document.querySelector('#preview');
+                const hiddenInput = document.querySelector('#video_url');
+                const fileInfo = document.querySelector('.file-upload-info'); 
+
+                if (oldVideo) {
+                    preview.src = oldVideo;
+                    preview.style.display = 'block';
+                    hiddenInput.value = oldVideo;
+                    const fileName = oldVideo.split('/').pop();
+                    fileInfo.value = fileName;
+                }
+            });
+        </script>
+    @endif
