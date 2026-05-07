@@ -94,7 +94,7 @@
 
     async function sendSessionToN8N() {
         try {
-            const response = await fetch('https://n8n.mhieu.io.vn/webhook/postgrest', {
+            const response = await fetch('https://mtedu.mhieu.io.vn//webhook/postgrest', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

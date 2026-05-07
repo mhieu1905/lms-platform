@@ -95,7 +95,7 @@
                                 <tr>
                                     <td align="center" style="padding: 30px 0;">
                                         <!--[if mso]>
-                                        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://eduma.oncloudtop.com{{ route('home.index', [], false) }}" style="height:50px;v-text-anchor:middle;width:200px;" arcsize="50%" strokecolor="#6da933" fillcolor="#6da933">
+                                        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://mtedu.mhieu.io.vn{{ route('home.index', [], false) }}" style="height:50px;v-text-anchor:middle;width:200px;" arcsize="50%" strokecolor="#6da933" fillcolor="#6da933">
                                             <w:anchorlock/>
                                             <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">
                                                 {{ $type === 'inactive' ? 'Continue Learning →' : 'Get Back on Track →' }}
@@ -106,7 +106,7 @@
                                         <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td align="center" bgcolor="#6da933" style="border-radius: 25px;">
-                                                    <a href="https://eduma.oncloudtop.com{{ route('home.index', [], false) }}" target="_blank" style="display: inline-block; padding: 16px 36px; color: #ffffff; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; text-decoration: none;">
+                                                    <a href="https://mtedu.mhieu.io.vn{{ route('home.index', [], false) }}" target="_blank" style="display: inline-block; padding: 16px 36px; color: #ffffff; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; text-decoration: none;">
                                                         {{ $type === 'inactive' ? 'Continue Learning →' : 'Get Back on Track →' }}
                                                     </a>
                                                 </td>

@@ -34,7 +34,7 @@ class InactiveUserReminderMail extends Mailable implements ShouldQueue
 
     public function content(): Content
     {
-        URL::forceRootUrl('https://eduma.oncloudtop.com');
+        URL::forceRootUrl('https://mtedu.mhieu.io.vn');
 
         $avgProgress = $this->insight->avg_progress ?? 0;
         $inactiveDays = $this->insight->inactive_days ?? 0;
