@@ -1,61 +1,142 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎓 Eduma - Learning Management System (LMS)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-stack Learning Management System built with Laravel, developed as an internal training project during my internship at Mirabo-Tech.
 
-## About Laravel
+The system is designed to manage courses, lessons, users, payments, and learning analytics with a clean service-oriented architecture and scalable backend design.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Key Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 📚 Course Management
+- Multi-level course structure (Course → Chapter → Lesson)
+- Full CRUD operations for learning content
+- Lesson ordering and hierarchical constraints
+- Prevent deletion of chapters containing active lessons
 
-## Learning Laravel
+### 👤 User & Access Control (RBAC)
+- Role-Based Access Control (Admin, Instructor, Student)
+- Permission-based middleware system
+- Role hierarchy with granular access control
+- Secure route protection
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 💳 Payment Integration
+- Integrated **SePay payment gateway**
+- Webhook handling for real-time payment updates
+- Automatic enrollment after successful payment
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 🤖 AI Chatbot Integration
+- Chatbot workflow automation using **n8n**
+- User support and interaction automation
+- Event-driven response system
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 📊 Tracking & Analytics
+- User activity logging system (Create / Update / Delete actions)
+- Learning progress tracking
+- Study insight generation for user engagement analysis
 
-## Laravel Sponsors
+### 📈 Recommendation System
+- CV-based course recommendation API
+- Matching user profile with relevant learning paths
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### ⚡ Background Processing
+- Queue system for heavy tasks (email, analytics, insights)
+- Asynchronous job processing for performance optimization
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 🏗️ Architecture Overview
 
-## Contributing
+This project follows a **Service-Oriented Architecture (SOA)** approach:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Controllers → handle HTTP requests only
+- Services → contain all business logic
+- Models → data layer abstraction
+- Middleware → authorization & access control
+- Jobs/Queues → background processing
 
-## Code of Conduct
+Key design principles applied:
+- Separation of concerns
+- Modular service layer
+- Reusable business logic
+- Scalable architecture structure
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 🛠️ Tech Stack
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Backend
+- PHP 8+
+- Laravel Framework
+- MySQL
+- RESTful API
 
-## License
+### Frontend
+- Blade Templates
+- JavaScript (ES6+)
+- CSS
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### DevOps / Tools
+- Docker (containerization)
+- Linux VPS deployment
+- Nginx
+- Git, GitHub
+- Composer
+- npm
+- Postman
+
+### Integrations
+- SePay Payment API
+- n8n workflow automation
+
+---
+
+## 🐳 Deployment
+
+- Application containerized using **Docker**
+- Deployed on a **Linux VPS**
+- Configured Nginx as reverse proxy
+- Environment managed using `.env` configuration
+
+---
+
+## 📊 My Contributions
+
+As a Software Engineer Intern in a 2-member team, I was responsible for:
+
+- Designing and implementing service-based backend architecture
+- Building core LMS features (course, lesson, user management)
+- Developing RESTful APIs for system functionality
+- Implementing RBAC authorization system
+- Integrating payment gateway (SePay)
+- Developing chatbot automation workflow (n8n)
+- Building activity tracking and analytics system
+- Implementing queue-based background processing
+- Deploying application on Docker-based VPS environment
+
+---
+
+## 💡 Key Learnings
+
+- Building scalable backend architecture using Laravel
+- Designing modular service-oriented systems
+- Working with real-world integrations (payment, webhook, automation)
+- Understanding system performance optimization using queues & caching concepts
+- Deploying production-like applications on VPS
+
+---
+
+## 📌 Project Status
+
+This is an internal training project completed during internship and is used for learning, system design practice, and portfolio demonstration purposes.
+
+---
+
+## 📬 Contact
+
+If you want to discuss this project or my experience:
+
+- GitHub: [mhieu1905]
+- Email: [minhhieuleviet@gmail.com]
+
+---
